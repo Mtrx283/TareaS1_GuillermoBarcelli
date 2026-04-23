@@ -34,8 +34,6 @@ namespace Granja_Guillermo_Barcelli
             for (int i = 0; i < initialPens; i++) animalPens.Add(new AnimalPen());
         }
 
-        // ── Plantas ──────────────────────────────────────────
-
         public bool SowPlant(int slotIndex, Plant plant)
         {
             PlotSlot slot = GetPlot(slotIndex);
@@ -68,8 +66,6 @@ namespace Granja_Guillermo_Barcelli
             Console.WriteLine($"Cosechaste {harvested.Name}! Revisa tu inventario para venderlo.");
             return true;
         }
-
-        // ── Animales ─────────────────────────────────────────
 
         public bool BuyAnimal(Animal animal)
         {
@@ -104,8 +100,6 @@ namespace Granja_Guillermo_Barcelli
             return true;
         }
 
-        // ── Ventas ───────────────────────────────────────────
-
         public bool SellItem(int inventoryIndex)
         {
             if (inventoryIndex < 0 || inventoryIndex >= inventory.Count) return false;
@@ -115,8 +109,6 @@ namespace Granja_Guillermo_Barcelli
             Console.WriteLine($"Pusiste {item.Name} a la venta. Recibiras ${item.SellPrice} en {item.SellDays} dia(s).");
             return true;
         }
-
-        // ── Expansion ────────────────────────────────────────
 
         public bool ExpandPlots()
         {
@@ -144,8 +136,6 @@ namespace Granja_Guillermo_Barcelli
             return true;
         }
 
-        // ── Avanzar dia ──────────────────────────────────────
-
         public void AdvanceDay()
         {
             CurrentDay++;
@@ -153,7 +143,6 @@ namespace Granja_Guillermo_Barcelli
             foreach (PlotSlot slot in plantPlots) slot.AdvanceDay();
             foreach (AnimalPen pen in animalPens) pen.AdvanceDay();
 
-            // Procesar ventas completadas
             List<PendingSale> completed = new List<PendingSale>();
             foreach (PendingSale sale in pendingSales)
             {
@@ -167,8 +156,6 @@ namespace Granja_Guillermo_Barcelli
                 Console.WriteLine($"  >> Venta completada: {sale.ItemName} por ${sale.SalePrice}! (Dinero total: ${Money:F0})");
             }
         }
-
-        // ── Mostrar informacion ──────────────────────────────
 
         public void DisplayStatus()
         {
@@ -206,8 +193,6 @@ namespace Granja_Guillermo_Barcelli
             foreach (PendingSale sale in pendingSales)
                 Console.WriteLine($"  - {sale}");
         }
-
-        // ── Accesores internos para Game ─────────────────────
 
         public PlotSlot GetPlot(int index) => (index >= 0 && index < plantPlots.Count) ? plantPlots[index] : null;
         public AnimalPen GetPen(int index) => (index >= 0 && index < animalPens.Count) ? animalPens[index] : null;

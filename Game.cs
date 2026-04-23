@@ -70,11 +70,8 @@ namespace Granja_Guillermo_Barcelli
             }
         }
 
-        // ── Menus ────────────────────────────────────────────
-
         private void MenuSowSeed()
         {
-            // Buscar parcelas vacias
             List<PlotSlot> plots = farm.GetPlots();
             List<int> emptyIndices = new List<int>();
             for (int i = 0; i < plots.Count; i++)
@@ -99,7 +96,6 @@ namespace Granja_Guillermo_Barcelli
             }
             int selectedIndex = emptyIndices[plotChoice - 1];
 
-            // Elegir semilla
             List<Plant> seeds = new List<Plant> { new Wheat(), new Carrot(), new Tomato() };
             Console.WriteLine("\nSemillas disponibles:");
             for (int i = 0; i < seeds.Count; i++)
@@ -146,7 +142,6 @@ namespace Granja_Guillermo_Barcelli
 
         private void MenuBuyAnimal()
         {
-            // Verificar que haya corral libre antes de mostrar opciones
             bool hasEmpty = false;
             foreach (AnimalPen pen in farm.GetPens())
                 if (pen.IsEmpty) { hasEmpty = true; break; }
